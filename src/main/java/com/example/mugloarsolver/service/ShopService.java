@@ -1,7 +1,7 @@
 package com.example.mugloarsolver.service;
 
-import com.example.mugloarsolver.model.response.GameResponse;
 import com.example.mugloarsolver.model.ShopItem;
+import com.example.mugloarsolver.model.response.GameResponse;
 import com.example.mugloarsolver.model.response.ShopResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,10 +36,7 @@ public class ShopService {
             logger.warn("⚠️ No items available in the shop.");
             return List.of();
         }
-        logger.info("📦 {} items available in shop: {}", shopItems.size(),
-                shopItems.stream()
-                        .map(item -> String.format("Name: %s, Cost: %d", item.getName(), item.getCost()))
-                        .toList());
+        logger.info("📦 {} items available in shop: {}", shopItems.size(), shopItems.stream().map(item -> String.format("Name: %s, Cost: %d", item.getName(), item.getCost())).toList());
         List<ShopItem> purchasedItems = new ArrayList<>();
         for (ShopItem item : shopItems) {
             if (game.getGold() >= item.getCost()) {
@@ -49,8 +46,7 @@ public class ShopService {
                     game.setGold(response.getGold());
                     game.setLives(response.getLives());
                     purchasedItems.add(item);
-                    logger.info("✅ Purchase successful! Bought '{}'. Remaining Gold: {}, Lives: {}",
-                            item.getName(), game.getGold(), game.getLives());
+                    logger.info("✅ Purchase successful! Bought '{}'. Remaining Gold: {}, Lives: {}", item.getName(), game.getGold(), game.getLives());
                 }
             }
         }
@@ -61,9 +57,8 @@ public class ShopService {
         String url = BASE_URL + "/" + gameId + "/shop";
         logger.info("🛍️ Fetching shop items: GET {}", url);
         try {
-            ResponseEntity<List<ShopItem>> response = restTemplate.exchange(
-                    url, HttpMethod.GET, null, new ParameterizedTypeReference<>() {
-                    });
+            ResponseEntity<List<ShopItem>> response = restTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<>() {
+            });
             return response.getBody();
         } catch (HttpClientErrorException e) {
             logger.error("❌ HTTP error while getting shop items: {} {}", e.getStatusCode(), e.getResponseBodyAsString());

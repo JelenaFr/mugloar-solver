@@ -47,9 +47,9 @@ public class GameControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.gameId").value("testGameId"))
-                .andExpect( jsonPath("$.lives").value(3))
-                .andExpect( jsonPath("$.gold").value(100))
-                .andExpect( jsonPath("$.score").value(0));
+                .andExpect(jsonPath("$.lives").value(3))
+                .andExpect(jsonPath("$.gold").value(100))
+                .andExpect(jsonPath("$.score").value(0));
 
         verify(gameService, times(1)).autoPlay();
     }

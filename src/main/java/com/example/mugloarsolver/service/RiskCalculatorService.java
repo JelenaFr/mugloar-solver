@@ -23,18 +23,14 @@ public class RiskCalculatorService {
 
         boolean hasProtection = hasProtection(purchasedItems);
 
-
         if (game.getLives() < 3)
             risk += 50;
         else if (game.getLives() > 10)
             risk -= 20;
-
         if (expiresIn < 2)
             risk += 50;
         else if (expiresIn < 5)
             risk += 20;
-
-
         if (reward > 100)
             risk += 30;
 

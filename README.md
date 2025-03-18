@@ -1,4 +1,4 @@
-# Mugloar Solver - Automatic bot for the game "Dragons of Mugloar""
+# Mugloar Solver - Automatic bot for the game "Dragons of Mugloar"
 
 ## Description
 This project implements a bot that automatically completes quests, analyzes risks, buys items in the store and manages a strategy to achieve the maximum score.
@@ -11,14 +11,14 @@ The game continues until you reach 1000 points or until you have life.
 - SLF4J (logging)
 - Gradle
 
-## 🚀 Install and run
+## Install and run
 
-## 📥 Clone the Repository
+## Clone the Repository
 
 1. Open a terminal and navigate to your desired directory.
 2. Clone the repository:
    ```sh
-   git clone https://github.com/your-repo/mugloar-solver.git
+   git clone https://github.com/JelenaFr/mugloar-solver.git
    ```
 3. Navigate into the project folder:
    ```sh
@@ -27,9 +27,9 @@ The game continues until you reach 1000 points or until you have life.
 
 ---
 
-## 🚀 Build and Run the Project
+## Build and Run the Project
 
-### 🏁 Running with Gradle
+### Running with Gradle
 
 For Windows:
 
@@ -43,7 +43,7 @@ For Linux/macOS:
 ./gradlew bootRun
 ```
 
-### 🔨 Build the Project
+### Build the Project
 
 To build the project manually, run:
 
@@ -51,7 +51,7 @@ To build the project manually, run:
 ./gradlew build
 ```
 
-### 🏃 Running the JAR File
+### Running the JAR File
 
 After building, you can run the application with:
 
@@ -63,23 +63,23 @@ The server will start on port **8080**.
 
 ---
 
-## 🎮 Start a New Game
+## Start a New Game
 
 To start a game, send an HTTP POST request to the server.
 
-### 📌 Using PowerShell
+### Using PowerShell
 
 ```sh
 curl -Method Post http://localhost:8080/game/start
 ```
 
-### 📌 Using Terminal (Linux/macOS)
+### Using Terminal (Linux/macOS)
 
 ```sh
 curl -X POST http://localhost:8080/game/start
 ```
 
-### 📌 Using Postman
+### Using Postman
 
 1. Open **Postman**.
 2. Select **POST**.
@@ -93,13 +93,13 @@ Once the request is completed, the server will return a JSON response with the g
 
 ---
 
-## 📝 Additional Information
+## Additional Information
 
 - Ensure that **Java 17+** is installed.
 - If the default **8080** port is in use, you can change it in `application.properties`.
 - Logs will be available in the terminal for debugging.
 
-Happy gaming! 🎮🔥
+Happy gaming! 
 
 
 ## APIs that the bot uses

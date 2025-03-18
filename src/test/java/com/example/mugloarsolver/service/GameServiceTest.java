@@ -58,6 +58,7 @@ class GameServiceTest {
         assertEquals("12345", response.getGameId());
         verify(restTemplate, times(1)).postForObject(anyString(), eq(null), eq(GameResponse.class));
     }
+
     @Test
     void getReputation_ShouldReturnReputationResponse() {
         // Given
@@ -113,9 +114,9 @@ class GameServiceTest {
         List<ShopItem> purchasedItems = shopService.checkAndBuyItems(game);
 
         // Then
-        assertEquals(1, purchasedItems.size()); // Ожидаем, что 1 предмет был куплен
-        assertEquals(150, game.getGold()); // Проверяем обновление золота
-        assertEquals(4, game.getLives()); // Проверяем обновление жизней
+        assertEquals(1, purchasedItems.size());
+        assertEquals(150, game.getGold());
+        assertEquals(4, game.getLives());
     }
 
 }

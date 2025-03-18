@@ -42,7 +42,6 @@ class GameControllerIntegrationTest {
                 .andExpect(jsonPath("$.gold").value(100))
                 .andExpect(jsonPath("$.score").value(0));
 
-
         verify(gameService, times(1)).autoPlay();
     }
 }

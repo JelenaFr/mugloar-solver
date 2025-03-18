@@ -24,5 +24,4 @@ public class GameController {
         return gameService.autoPlay();
     }
 
-
 }

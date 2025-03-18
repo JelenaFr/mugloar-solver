@@ -51,6 +51,7 @@ public class MessageServiceTest {
         assertEquals(1, messages.size());
         assertEquals("Test message", messages.get(0).getMessage());
     }
+
     @Test
     void chooseBestMessage_ShouldReturnBestMessage() {
         // Given
@@ -64,10 +65,10 @@ public class MessageServiceTest {
 
         List<MessageResponse.Message> messages = List.of(msg1, msg2);
 
-        // Mocking risk calculation (если нужно)
+        // Mocking risk calculation
         when(riskCalculatorService.safeParseInt("50")).thenReturn(50);
         when(riskCalculatorService.safeParseInt("100")).thenReturn(100);
-        when(riskCalculatorService.calculateRisk(any(), any(), any())).thenReturn(10);  // Задаем риск
+        when(riskCalculatorService.calculateRisk(any(), any(), any())).thenReturn(10);
 
         // When
         Optional<MessageResponse.Message> bestMessage = messageService.chooseBestMessage(messages, new GameResponse(), List.of());

@@ -18,7 +18,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
-import static org.mockito.ArgumentMatchers.isNull;
 
 public class ShopServiceTest {
     @Mock
@@ -77,7 +76,8 @@ public class ShopServiceTest {
     @Test
     void getShopItems_ShouldThrowException_WhenRequestFails() {
         // Given
-        when(restTemplate.exchange(anyString(), any(), any(), eq(new ParameterizedTypeReference<List<ShopItem>>() {})))
+        when(restTemplate.exchange(anyString(), any(), any(), eq(new ParameterizedTypeReference<List<ShopItem>>() {
+        })))
                 .thenThrow(new HttpClientErrorException(HttpStatus.NOT_FOUND));
 
         // When & Then

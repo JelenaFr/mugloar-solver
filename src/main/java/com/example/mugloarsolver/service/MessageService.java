@@ -1,8 +1,8 @@
 package com.example.mugloarsolver.service;
 
+import com.example.mugloarsolver.model.ShopItem;
 import com.example.mugloarsolver.model.response.GameResponse;
 import com.example.mugloarsolver.model.response.MessageResponse;
-import com.example.mugloarsolver.model.ShopItem;
 import com.example.mugloarsolver.model.response.SolveMessageResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,9 +33,8 @@ public class MessageService {
     public List<MessageResponse.Message> getMessages(String gameId) {
         String url = BASE_URL + "/" + gameId + "/messages";
         logger.info("📡 Requesting messages: GET {}", url);
-        ResponseEntity<List<MessageResponse.Message>> response = restTemplate.exchange(
-                url, HttpMethod.GET, null, new ParameterizedTypeReference<>() {
-                });
+        ResponseEntity<List<MessageResponse.Message>> response = restTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<>() {
+        });
         return response.getBody();
     }
 
@@ -45,14 +44,11 @@ public class MessageService {
         return restTemplate.postForObject(url, null, SolveMessageResponse.class);
     }
 
-
     public Optional<MessageResponse.Message> chooseBestMessage(List<MessageResponse.Message> messages, GameResponse game, List<ShopItem> purchasedItems) {
-
         if (messages == null || messages.isEmpty()) {
             logger.warn("⚠️ No available messages for gameId={}", game.getGameId());
             return Optional.empty();
         }
-
         return messages.stream()
                 .map(this::decodeMessage)
                 .filter(msg -> msg.getProbability() != null)
@@ -61,23 +57,24 @@ public class MessageService {
                         && !msg.getProbability().equals("Gamble")
                         && !msg.getProbability().equals("Suicide mission")
                         && !msg.getProbability().equals("Rather detrimental")
-                        && !(msg.getProbability().equals("Playing with fire") && !hasProtection(purchasedItems)))  // 🔥 Исключаем "Playing with fire" без защиты
+                        && !(msg.getProbability().equals("Playing with fire")
+                        && !hasProtection(purchasedItems)))
                 .filter(msg -> isNumeric(msg.getReward()))
                 .max(Comparator.comparingInt(msg -> riskCalculatorService.safeParseInt(msg.getReward()) - riskCalculatorService.calculateRisk(msg, game, purchasedItems)))
                 .map(this::decodeMessage);
     }
 
     private boolean isValidProbability(String probability) {
-        return probability.equals("Sure thing") ||
-                probability.equals("Piece of cake") ||
-                probability.equals("Walk in the park") ||
-                probability.equals("Quite likely") ||
-                probability.equals("Risky") ||
-                probability.equals("Rather detrimental") ||
-                probability.equals("Suicide mission") ||
-                probability.equals("Playing with fire") ||
-                probability.equals("Hmmm...") ||
-                probability.equals("Gamble");
+        return probability.equals("Sure thing")
+                || probability.equals("Piece of cake")
+                || probability.equals("Walk in the park")
+                || probability.equals("Quite likely")
+                || probability.equals("Risky")
+                || probability.equals("Rather detrimental")
+                || probability.equals("Suicide mission")
+                || probability.equals("Playing with fire")
+                || probability.equals("Hmmm...")
+                || probability.equals("Gamble");
     }
 
     private boolean isNumeric(String str) {
@@ -107,9 +104,6 @@ public class MessageService {
     }
 
     private boolean hasProtection(List<ShopItem> purchasedItems) {
-        return purchasedItems.stream()
-                .anyMatch(item -> item.getName().contains("Plating") || item.getName().contains("Potion"));
+        return purchasedItems.stream().anyMatch(item -> item.getName().contains("Plating") || item.getName().contains("Potion"));
     }
-
-
 }
