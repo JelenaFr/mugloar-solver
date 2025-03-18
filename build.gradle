@@ -24,21 +24,12 @@ repositories {
 }
 
 dependencies {
-    // Spring Boot Web (для API-запросов)
     implementation 'org.springframework.boot:spring-boot-starter-web'
-
-    // WebClient (современная замена RestTemplate)
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
-
-    // Lombok (автоматическая генерация геттеров/сеттеров)
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
-
-    // Unit-тестирование
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-
-
 }
 
 tasks.named('test') {
