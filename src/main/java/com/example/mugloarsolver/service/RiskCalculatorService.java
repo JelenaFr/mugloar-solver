@@ -41,7 +41,7 @@ public class RiskCalculatorService {
             case "Quite likely" -> risk -= 10;
             case "Risky" -> risk += 20;
             case "Rather detrimental" -> risk += 50;
-            case "Playing with fire" -> risk += hasProtection ? 0 : 100;
+            case "Playing with fire" -> risk += hasProtection ? -50 : 100;
             case "Suicide mission" -> risk += hasProtection ? 70 : 150;
             default -> logger.warn("⚠️ Unknown probability '{}', risk unchanged", probability);
         }
